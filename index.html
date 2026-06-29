@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Athif Nirwasito — Data Scientist & AI Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    :root {
+      --bg: #0f0f0f;
+      --bg2: #171717;
+      --bg3: #1f1f1f;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #888;
+      --accent: #6ee7b7;
+      --accent2: #3b82f6;
+      --font: 'Inter', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+ 
+    html { scroll-behavior: smooth; }
+ 
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+ 
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15,15,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.04em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+ 
+    /* LAYOUT */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 5rem 0; border-bottom: 1px solid var(--border); }
+    section:last-child { border-bottom: none; }
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+ 
+    /* HERO */
+    #hero { padding: 7rem 0 5rem; }
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      background: rgba(110,231,183,0.08);
+      border: 1px solid rgba(110,231,183,0.2);
+      border-radius: 99px;
+      padding: 4px 12px;
+      margin-bottom: 2rem;
+    }
+    .hero-status::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+    .hero h1 strong {
+      font-weight: 600;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc { font-size: 16px; color: var(--muted); max-width: 520px; line-height: 1.7; margin-bottom: 2.5rem; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2.5rem; }
+    .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 10px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 9px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      display: inline-block;
+    }
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-primary:hover { background: #a7f3d0; }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
+ 
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .skill-card { background: var(--bg2); padding: 1.5rem; transition: background 0.2s; }
+    .skill-card:hover { background: var(--bg3); }
+    .skill-card-icon { font-size: 20px; margin-bottom: 0.75rem; }
+    .skill-card h3 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 5px; }
+    .skill-pill { font-family: var(--mono); font-size: 10px; color: var(--muted); background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 2px 7px; }
+ 
+    /* PROJECTS */
+    .projects-category { margin-bottom: 3rem; }
+    .projects-category:last-child { margin-bottom: 0; }
+    .category-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .project-card {
+      background: var(--bg2);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: background 0.2s;
+      position: relative;
+    }
+    .project-card:hover { background: var(--bg3); }
+    .project-card:hover .project-arrow { opacity: 1; transform: translate(0,0); }
+    .project-arrow {
+      position: absolute;
+      top: 1.25rem; right: 1.25rem;
+      color: var(--muted);
+      font-size: 14px;
+      opacity: 0;
+      transform: translate(-4px, 4px);
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .project-card h3 { font-size: 14px; font-weight: 600; color: var(--text); padding-right: 1.5rem; }
+    .project-card p { font-size: 12px; color: var(--muted); line-height: 1.6; flex: 1; }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 0.25rem; }
+    .stack-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent2);
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 3px;
+      padding: 2px 6px;
+    }
+    .private-badge {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--muted);
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 2px 6px;
+      align-self: flex-start;
+    }
+    .wip-badge {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: #f59e0b;
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 3px;
+      padding: 2px 6px;
+      align-self: flex-start;
+    }
+    .note-text {
+      font-size: 11px;
+      color: var(--muted);
+      font-style: italic;
+      opacity: 0.7;
+    }
+ 
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-item { display: grid; grid-template-columns: 140px 1fr; gap: 1.5rem; padding: 1.75rem 0; border-bottom: 1px solid var(--border); }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-date { font-family: var(--mono); font-size: 11px; color: var(--muted); padding-top: 3px; line-height: 1.5; }
+    .exp-role { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+    .exp-company { font-size: 12px; color: var(--accent); margin-bottom: 0.6rem; font-family: var(--mono); }
+    .exp-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+ 
+    /* CONTACT */
+    #contact { text-align: center; padding: 6rem 0; }
+    #contact h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 300; color: #fff; margin-bottom: 1rem; }
+    #contact p { color: var(--muted); font-size: 15px; margin-bottom: 2.5rem; }
+    .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+ 
+    /* FOOTER */
+    footer { text-align: center; padding: 2rem; font-family: var(--mono); font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); }
+ 
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { gap: 1.25rem; }
+      .container { padding: 0 1.25rem; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .exp-date { padding-top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">Athif Nirwasito</span>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-status">Available for work</div>
+      <h1>
+        Data Scientist,<br>
+        <strong>Backend & AI Engineer</strong>
+      </h1>
+      <p class="hero-desc">
+        <!-- Insert what you do here. For example
+          I build intelligent systems that turn raw data into real decisions —
+          from model training to production APIs. Based in Bandung, Indonesia.
+        -->
+      </p>
+      <div class="hero-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Computer Vision</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">Django</span>
+        <span class="tag">Docker</span>
+        <span class="tag">HuggingFace</span>
+        <span class="tag">MLFlow</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-eyebrow">What I work with</p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-card-icon">📊</div>
+          <h3>Data Science</h3>
+          <div class="skill-list">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">Pandas</span>
+            <span class="skill-pill">Scikit-learn</span>
+            <span class="skill-pill">XGBoost</span>
+            <span class="skill-pill">Seaborn</span>
+            <span class="skill-pill">Optuna</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-icon">⚙️</div>
+          <h3>Backend</h3>
+          <div class="skill-list">
+            <span class="skill-pill">Django</span>
+            <span class="skill-pill">PostgreSQL</span>
+            <span class="skill-pill">Node.js</span>
+            <span class="skill-pill">Docker</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-icon">🤖</div>
+          <h3>AI / LLM</h3>
+          <div class="skill-list">
+            <span class="skill-pill">PyTorch</span>
+            <span class="skill-pill">TensorFlow</span>
+            <span class="skill-pill">HuggingFace</span>
+            <span class="skill-pill">Fine-tuning</span>
+            <span class="skill-pill">MLFlow</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+
+  <section id="projects">
+    <div class="container">
+      <p class="section-eyebrow">Selected work</p>
+ 
+      <div class="projects-category">
+        <div class="category-label">Data Science / AI</div>
+        <div class="projects-grid">
+          <div class="project-card">
+            <span class="private-badge">private repo</span>
+            <h3>PT Pertamina Power Indonesia — Internship</h3>
+            <p>Temporal data analysis and ML model development using experiment design and Explainable AI (XAI) methods. Presented findings from model evaluation to stakeholders.</p>
+            <div class="project-stack">
+              <span class="stack-tag">Python</span>
+              <span class="stack-tag">TensorFlow</span>
+              <span class="stack-tag">Scikit-learn</span>
+              <span class="stack-tag">Seaborn</span>
+              <span class="stack-tag">XAI</span>
+            </div>
+          </div>
+          <div class="project-card">
+            <span class="private-badge">private repo</span>
+            <h3>KNN & Naive Bayes from Scratch</h3>
+            <p>Implemented K-Nearest Neighbours and Naive Bayes classifiers from scratch without ML libraries, for deeper understanding of the underlying algorithms.</p>
+            <div class="project-stack">
+              <span class="stack-tag">Python</span>
+              <span class="stack-tag">Pandas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="projects-category">
+        <div class="category-label">Backend</div>
+        <div class="projects-grid">
+          <div class="project-card">
+            <span class="private-badge">private repo</span>
+            <h3>Aplikasi Pengukuran CPL/CPMK</h3>
+            <p>Operational grading app used to measure course learning outcome accomplishment, built for academic use.</p>
+            <div class="project-stack">
+              <span class="stack-tag">Django</span>
+              <span class="stack-tag">Python</span>
+            </div>
+          </div>
+          <div class="project-card">
+            <a href="https://github.com/Onyxcodeotto/TowerPonicBackend" target="_blank" class="project-arrow">↗</a>
+            <span class="wip-badge">in progress</span>
+            <h3>TowerPonic Backend</h3>
+            <p>Personal backend to manage a hydroponic monitoring setup. Handles MQTT messages from ESP32 sensors and exposes a REST API for the frontend.</p>
+            <div class="project-stack">
+              <span class="stack-tag">Node.js</span>
+              <span class="stack-tag">Express</span>
+              <span class="stack-tag">PostgreSQL</span>
+              <span class="stack-tag">HiveMQ</span>
+              <span class="stack-tag">Vercel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="projects-category">
+        <div class="category-label">IoT</div>
+        <div class="projects-grid">
+          <div class="project-card">
+            <a href="https://github.com/Onyxcodeotto/GowesTracker-ESP32" target="_blank" class="project-arrow">↗</a>
+            <h3>GowesTracker</h3>
+            <p>Prototype for cycle route tracking using an ESP32. Sends location data over MQTT for real-time monitoring.</p>
+            <div class="project-stack">
+              <span class="stack-tag">C++</span>
+              <span class="stack-tag">ESP32</span>
+              <span class="stack-tag">MQTT</span>
+            </div>
+          </div>
+          <div class="project-card">
+            <a href="https://github.com/Onyxcodeotto/TowerPonicMonitor" target="_blank" class="project-arrow">↗</a>
+            <span class="wip-badge">in progress</span>
+            <h3>TowerPonic Monitor</h3>
+            <p>ESP32-based sensor node for tracking the environment of a personal hydroponic setup. Publishes readings over MQTT to the TowerPonic backend.</p>
+            <div class="project-stack">
+              <span class="stack-tag">C++</span>
+              <span class="stack-tag">ESP32</span>
+              <span class="stack-tag">MQTT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="projects-category">
+        <div class="category-label">Frontend <span style="font-size:9px;color:var(--muted);font-style:italic;text-transform:none;letter-spacing:0">(AI-assisted)</span></div>
+        <div class="projects-grid">
+          <div class="project-card">
+            <a href="https://github.com/munzayanahusn/IF4042-QEWordNet-frontend" target="_blank" class="project-arrow">↗</a>
+            <h3>STBI Wordnet</h3>
+            <p>A web app to experiment with text document search using WordNet-based query expansion.</p>
+            <div class="project-stack">
+              <span class="stack-tag">React</span>
+              <span class="stack-tag">Chakra UI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <p class="section-eyebrow">Experience</p>
+      <div class="exp-list">
+
+        <div class="exp-item">
+          <div class="exp-date">August - October 2024</div>
+          <div>
+            <div class="exp-role">Data Scientist</div>
+            <div class="exp-company">PT Pertamina Power Indonesia · Internship</div>
+            <div class="exp-desc">Researching machine learning point of view on how a power plant operates as a reference on how to optimize output.</div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-date">2023 — 2025</div>
+          <div>
+            <div class="exp-role">AI Class Assistant</div>
+            <div class="exp-company">Institut Teknologi Bandung · Part-time</div>
+            <div class="exp-desc">Assisted in creating project assignments and monitoring exams for AI/ML courses.</div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-date">2023 — 2024</div>
+          <div>
+            <div class="exp-role">Community Service Staff</div>
+            <div class="exp-company">Himpunan Mahasiswa Informatika · Member</div>
+            <div class="exp-desc">Designed teaching materials for programming workshops for high school students.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-eyebrow">Hello</p>
+      <h2>Let's work together</h2>
+      <p>Open to freelance projects, full-time roles, and collaborations.</p>
+      <div class="contact-links">
+        <a href="mailto:athifnirwasito16@gmail.com" class="btn btn-primary">Email Me</a>
+        <a href="https://www.linkedin.com/in/athif-nirwasito-3aa523260" target="_blank" class="btn btn-primary">LinkedIn</a>
+        <a href="https://github.com/Onyxcodeotto" target="_blank" class="btn btn-primary">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Athif Nirwasito · <span id="year"></span>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
